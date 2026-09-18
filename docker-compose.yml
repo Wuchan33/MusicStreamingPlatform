@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:18
-    container_name: wuchan-postgres
+    container_name: musicstreaming-postgres
     restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -10,7 +10,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - wuchan_pgdata:/var/lib/postgresql
+      - musicstreaming_pgdata:/var/lib/postgresql
+      - ./db/postgres/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
@@ -18,4 +19,4 @@ services:
       retries: 5
 
 volumes:
-  wuchan_pgdata:
+  musicstreaming_pgdata:
