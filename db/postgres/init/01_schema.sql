@@ -408,9 +408,12 @@ CREATE TABLE playback_history (
         REFERENCES device_types (device_type_id)
 );
 
-CREATE INDEX idx_playback_history_user_id ON playback_history (user_id);
-CREATE INDEX idx_playback_history_playback_date ON playback_history (playback_date);
-CREATE INDEX idx_playback_history_device_type_id ON playback_history (device_type_id);
+CREATE INDEX idx_playback_history_user_id
+    ON playback_history (user_id);
+CREATE INDEX idx_playback_history_playback_date
+    ON playback_history (playback_date);
+CREATE INDEX idx_playback_history_device_type_id
+    ON playback_history (device_type_id);
 
 CREATE TABLE song_playback_details (
     playback_id INT PRIMARY KEY,
@@ -444,7 +447,8 @@ CREATE TABLE episode_playback_details (
         ON DELETE CASCADE
 );
 
-CREATE INDEX idx_episode_playback_details_episode_id ON episode_playback_details (episode_id);
+CREATE INDEX idx_episode_playback_details_episode_id
+    ON episode_playback_details (episode_id);
 
 CREATE TABLE ad_playback_details (
     playback_id INT PRIMARY KEY,

@@ -86,7 +86,8 @@ END;
 $$ LANGUAGE plpgsql;
 
 CREATE TRIGGER trg_user_subscriptions_set_end_date
-    BEFORE INSERT OR UPDATE OF start_date, subscription_type_id ON user_subscriptions
+    BEFORE INSERT OR UPDATE OF start_date, subscription_type_id
+    ON user_subscriptions
     FOR EACH ROW EXECUTE FUNCTION set_subscription_end_date();
 
 
