@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  database:
+    name: Build the database from scratch
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create .env from the example
+        run: cp .env.example .env
+
+      - name: Start the database and wait for it to become healthy
+        run: make up
+
+      - name: Show what the init scripts did
+        run: docker compose logs postgres
+
+      - name: Report the container state on failure
+        if: failure()
+        run: docker compose ps -a
